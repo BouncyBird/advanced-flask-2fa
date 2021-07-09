@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>You are {% if not current_user.is_authenticated %}NOT{% endif %} logged in</p>
+{% if current_user.is_authenticated %}
+<a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+<a href="{{ url_for('login') }}">Login</a>
+<a href="{{ url_for('register') }}">Register</a>
+{% endif %}
+{% endblock content %}

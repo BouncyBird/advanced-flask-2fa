@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Auth Setup</legend>
+        <p>Scan this QR code with an authenticator app on your phone<br>The recommended app is <a target="_blank"
+                href="https://www.microsoft.com/en-us/account/authenticator#getapp">Microsoft Authenticator</a><br>Other
+            apps such as Google Authenticator, also work</p>
+        <img src="{{ url_for('qr') }}" alt="QR code">
+        <div class="form-group mb-5">
+            {{ form.token.label(class="form-control-label") }}
+            {% if form.token.errors %}
+            {{ form.token(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.token.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.token(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+{% endblock content %}
